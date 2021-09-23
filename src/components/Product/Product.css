@@ -1,0 +1,14 @@
+.add-btn{
+    background-color: #F0C14B;
+    outline: none;
+    border: 1px solid #af8d37;
+    border-radius: 5px;
+    width: 200px;
+}
+.add-btn:hover{
+    background-color: #f0c75f;
+}
+.product-img{
+    width: 220px !important;
+    height: 220px !important;
+}
