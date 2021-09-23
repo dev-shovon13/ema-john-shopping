@@ -18,12 +18,12 @@ const Shop = () => {
     }, [])
     return (
         <div className="row products container mx-auto">
-            <div className="product-list col-9 p-3 border-end">
+            <div className="product-list col-7 col-md-9 p-3 border-end">
                 {
                     products.map(product => <Product key={product.key} {...product} handleAddToCart={handleAddToCart} />)
                 }
             </div>
-            <div className="cart-list col-3 p-3 sticky">
+            <div className="cart-list col-5 col-md-3 p-3 sticky">
                 <Cart cart={cart} />
             </div>
         </div>

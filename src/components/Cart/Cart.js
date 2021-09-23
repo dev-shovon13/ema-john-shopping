@@ -46,7 +46,7 @@ const Cart = (props) => {
                 </div>
             </div>
             <div className="text-center mt-3">
-                <button className="cart-btn"><small>Review Order</small></button>
+                <button className="cart-btn px-3"><small>Review Your Order</small></button>
             </div>
         </>
     );
