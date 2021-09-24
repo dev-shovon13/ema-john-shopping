@@ -7,7 +7,6 @@ import Rating from 'react-rating';
 
 const Product = (props) => {
     const { name, img, seller, price, stock, features, shipping, star } = props.product
-    console.log(props);
     return (
         <div className="row border-bottom p-2 align-items-center">
             <div className="text-center col-md-4 ">
