@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { addToDB, deleteFromDB, getStoredCart } from '../../utilities/fakeDB';
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
 import './Shop.css'
@@ -10,17 +11,38 @@ const Shop = () => {
     const handleAddToCart = (product) => {
         const newCart = [...cart, product]
         setCart(newCart)
+        addToDB(product.key)
+    }
+    const handleRemove = (product) => {
+        deleteFromDB(product.key)
     }
     useEffect(() => {
         fetch('./products.json')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
+
+    useEffect(() => {
+        const savedCart = getStoredCart()
+        const storedProducts = []
+        if (products.length) {
+            for (const key in savedCart) {
+                const productsAdded = products.find(product => product.key === key)
+                if (storedProducts) {
+                    const quantity = savedCart[key]
+                    productsAdded.quantity = quantity
+                    storedProducts.push(productsAdded)
+                }
+            }
+        }
+        setCart(storedProducts)
+    }, [products])
+
     return (
         <div className="row products container mx-auto">
             <div className="product-list col-7 col-md-9 p-3 border-end">
                 {
-                    products.map(product => <Product key={product.key} {...product} handleAddToCart={handleAddToCart} />)
+                    products.map(product => <Product key={product.key} product={product} handleAddToCart={handleAddToCart} handleRemove={handleRemove} />)
                 }
             </div>
             <div className="cart-list col-5 col-md-3 p-3 sticky">

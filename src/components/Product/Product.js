@@ -5,7 +5,7 @@ import { faShoppingCart, faStar, faStarHalfAlt } from '@fortawesome/free-solid-s
 import './Product.css'
 
 const Product = (props) => {
-    const { name, img, seller, price, stock, features, shipping } = props
+    const { name, img, seller, price, stock, features, shipping } = props.product
     // console.log(props);
     return (
         <div className="row border-bottom p-2 align-items-center">
@@ -23,7 +23,8 @@ const Product = (props) => {
                             <p>only <span className="text-danger fw-bold">{stock}</span> left in stock - order soon</p>
                         </div>
                         <div className="position-absolute bottom-0">
-                            <button className="add-btn px-md-5 px-3" onClick={() => props.handleAddToCart(props)}><small><FontAwesomeIcon icon={faShoppingCart} /> add to cart</small></button>
+                            <button className="add-btn px-md-5 px-3" onClick={() => props.handleAddToCart(props.product)}><small><FontAwesomeIcon icon={faShoppingCart} /> add to cart</small></button>
+                            <button className="add-btn px-md-5 px-3" onClick={() => props.handleRemove(props.product)}><small><FontAwesomeIcon icon={faShoppingCart} /> delete from cart</small></button>
                         </div>
                     </div>
                     <div className="info-right p-3 col-lg-6">

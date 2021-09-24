@@ -1,16 +1,23 @@
 import React from 'react';
-import './Cart.css'
+// cart button
+import '../Product/Product.css'
 
 const Cart = (props) => {
     const { cart } = props
     let total = 0
     for (const product of cart) {
-        total = total + product.price
+        if (!product.quantity) {
+            product.quantity = 1
+        }
+        total = total + product.price * product.quantity
     }
 
     let shipping = 0
     for (const product of cart) {
-        shipping = shipping + product.shipping
+        if (!product.quantity) {
+            product.quantity = 1
+        }
+        shipping = shipping + product.shipping * product.quantity
     }
     const totalBeforeTax = total + shipping
     const tax = totalBeforeTax * 0.1
@@ -21,7 +28,7 @@ const Cart = (props) => {
         <>
             <div className="text-center">
                 <h5>Order Summary</h5>
-                <p>Items ordered: {cart.length}</p>
+                <p>Items ordered: {cart.quantity}</p>
             </div>
             <div >
                 <div className="d-md-flex justify-content-between">
