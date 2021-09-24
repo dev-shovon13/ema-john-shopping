@@ -1,12 +1,13 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart, faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons'
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 
 import './Product.css'
+import Rating from 'react-rating';
 
 const Product = (props) => {
-    const { name, img, seller, price, stock, features, shipping } = props.product
-    // console.log(props);
+    const { name, img, seller, price, stock, features, shipping, star } = props.product
+    console.log(props);
     return (
         <div className="row border-bottom p-2 align-items-center">
             <div className="text-center col-md-4 ">
@@ -24,16 +25,18 @@ const Product = (props) => {
                         </div>
                         <div className="position-absolute bottom-0">
                             <button className="add-btn px-md-5 px-3" onClick={() => props.handleAddToCart(props.product)}><small><FontAwesomeIcon icon={faShoppingCart} /> add to cart</small></button>
-                            <button className="add-btn px-md-5 px-3" onClick={() => props.handleRemove(props.product)}><small><FontAwesomeIcon icon={faShoppingCart} /> delete from cart</small></button>
+                            {/* <button className="add-btn px-md-5 px-3" onClick={() => props.handleRemove(props.product)}><small><FontAwesomeIcon icon={faShoppingCart} /> delete from cart</small></button> */}
                         </div>
                     </div>
                     <div className="info-right p-3 col-lg-6">
                         <div className="text-warning mb-3">
-                            <FontAwesomeIcon icon={faStar} />
-                            <FontAwesomeIcon icon={faStar} />
-                            <FontAwesomeIcon icon={faStar} />
-                            <FontAwesomeIcon icon={faStar} />
-                            <FontAwesomeIcon icon={faStarHalfAlt} />
+                            <Rating
+                                className="rating"
+                                emptySymbol="fa fa-star-o fa-2x"
+                                fullSymbol="fa fa-star fa-2x"
+                                readonly
+                                initialRating={star}
+                            />
                         </div>
                         <h5>Features</h5>
                         {

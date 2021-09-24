@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { addToDB, deleteFromDB, getStoredCart } from '../../utilities/fakeDB';
 import Cart from '../Cart/Cart';
+import Header from '../Header/Header';
 import Product from '../Product/Product';
 import './Shop.css'
 
 const Shop = () => {
     const [products, setProducts] = useState([])
     const [cart, setCart] = useState([])
+    const [displayProducts, setDisplayProducts] = useState([])
 
     const handleAddToCart = (product) => {
         const newCart = [...cart, product]
@@ -19,7 +21,10 @@ const Shop = () => {
     useEffect(() => {
         fetch('./products.json')
             .then(res => res.json())
-            .then(data => setProducts(data))
+            .then(data => {
+                setProducts(data)
+                setDisplayProducts(data)
+            })
     }, [])
 
     useEffect(() => {
@@ -38,17 +43,26 @@ const Shop = () => {
         setCart(storedProducts)
     }, [products])
 
+    const handleSearch = event => {
+        const searchText = event.target.value
+        const matchedProducts = products.filter(product => product.name.toLowerCase().includes(searchText.toLowerCase()))
+        setDisplayProducts(matchedProducts)
+    }
+
     return (
-        <div className="row products container mx-auto">
-            <div className="product-list col-7 col-md-9 p-3 border-end">
-                {
-                    products.map(product => <Product key={product.key} product={product} handleAddToCart={handleAddToCart} handleRemove={handleRemove} />)
-                }
+        <>
+            <Header handleSearch={handleSearch} />
+            <div className="row products container mx-auto">
+                <div className="product-list col-7 col-md-9 p-3 border-end">
+                    {
+                        displayProducts.map(product => <Product key={product.key} product={product} handleAddToCart={handleAddToCart} handleRemove={handleRemove} />)
+                    }
+                </div>
+                <div className="cart-list col-5 col-md-3 p-3 sticky">
+                    <Cart cart={cart} />
+                </div>
             </div>
-            <div className="cart-list col-5 col-md-3 p-3 sticky">
-                <Cart cart={cart} />
-            </div>
-        </div>
+        </>
     );
 };
 

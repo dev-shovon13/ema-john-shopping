@@ -5,11 +5,13 @@ import '../Product/Product.css'
 const Cart = (props) => {
     const { cart } = props
     let total = 0
+    let totalQuantity = 0
     for (const product of cart) {
         if (!product.quantity) {
             product.quantity = 1
         }
         total = total + product.price * product.quantity
+        totalQuantity += product.quantity
     }
 
     let shipping = 0
@@ -28,7 +30,7 @@ const Cart = (props) => {
         <>
             <div className="text-center">
                 <h5>Order Summary</h5>
-                <p>Items ordered: {cart.quantity}</p>
+                <p>Items ordered: {totalQuantity}</p>
             </div>
             <div >
                 <div className="d-md-flex justify-content-between">
