@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 // cart button
 import '../Product/Product.css'
 
@@ -55,7 +56,9 @@ const Cart = (props) => {
                 </div>
             </div>
             <div className="text-center mt-3">
-                <button className="cart-btn px-3"><small>Review Your Order</small></button>
+                <Link to="/review">
+                    <button className="cart-btn px-3"><small>Review Your Order</small></button>
+                </Link>
             </div>
         </>
     );

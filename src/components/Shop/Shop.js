@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { addToDB, deleteFromDB, getStoredCart } from '../../utilities/fakeDB';
 import Cart from '../Cart/Cart';
-import Header from '../Header/Header';
+// import Header from '../Header/Header';
 import Product from '../Product/Product';
 import './Shop.css'
 
@@ -51,14 +51,17 @@ const Shop = () => {
 
     return (
         <>
-            <Header handleSearch={handleSearch} />
-            <div className="row products container mx-auto">
+            {/* <Header handleSearch={handleSearch} /> */}
+            <div className="bg-secondary py-2 fixed-top-2">
+                <input className="form-control mx-auto w-50 p-1 rounded outline-none" type="text" placeholder="Search Product" onChange={handleSearch} />
+            </div>
+            <div className="row products container mx-auto product-margin">
                 <div className="product-list col-7 col-md-9 p-3 border-end">
                     {
                         displayProducts.map(product => <Product key={product.key} product={product} handleAddToCart={handleAddToCart} handleRemove={handleRemove} />)
                     }
                 </div>
-                <div className="cart-list col-5 col-md-3 p-3 sticky">
+                <div className="cart-list col-5 col-md-3 p-3">
                     <Cart cart={cart} />
                 </div>
             </div>

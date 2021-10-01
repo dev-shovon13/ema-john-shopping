@@ -1,0 +1,27 @@
+.product-margin{
+    margin-top: 100px;
+}
+.fixed-top-1{
+    width: 100%;
+  position: fixed;
+  margin-top: -100px;
+  z-index: 1;
+  overflow-x: hidden;
+}
+.fixed-top-2{
+    width: 100%;
+  margin-top: -40px;
+  position: fixed;
+  z-index: 2;
+  overflow-x: hidden;
+}
+.cart-list{
+    height: 70%;
+  position: fixed;
+  z-index: 1;
+  top: 10;
+  right: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+  margin-right: 2%;
+}
