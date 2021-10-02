@@ -23,7 +23,7 @@ const Header = (props) => {
                                 color: "#c4181d",
                                 backgroundColor: 'rgb(235, 235, 235)'
                             }}
-                                to="/review">Order Review</NavLink>
+                                exact to="/review">Order Review</NavLink>
                             <NavLink activeStyle={{
                                 // fontWeight: "bold",
                                 color: "#c4181d",

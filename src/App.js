@@ -11,6 +11,7 @@ import OrderReview from './components/OrderReview/OrderReview';
 import Inventory from './components/Inventory/Inventory';
 import Header from './components/Header/Header';
 import NotFound from './components/NotFound/NotFound';
+import OrderDone from './components/OrderDone/OrderDone';
 
 function App() {
   return (
@@ -24,8 +25,11 @@ function App() {
           <Route path="/home">
             <Shop />
           </Route>
-          <Route path="/review">
+          <Route exact path="/review">
             <OrderReview />
+          </Route>
+          <Route exact path="/review/order">
+            <OrderDone />
           </Route>
           <Route path="/inventory">
             <Inventory />

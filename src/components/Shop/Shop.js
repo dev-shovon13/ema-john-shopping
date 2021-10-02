@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { addToDB, deleteFromDB, getStoredCart } from '../../utilities/fakeDB';
 import Cart from '../Cart/Cart';
 // import Header from '../Header/Header';
@@ -62,7 +63,11 @@ const Shop = () => {
                     }
                 </div>
                 <div className="cart-list col-5 col-md-3 p-3">
-                    <Cart cart={cart} />
+                    <Cart cart={cart}>
+                        <Link to="/review">
+                            <button className="cart-btn px-3"><small>Review Your Order</small></button>
+                        </Link>
+                    </Cart>
                 </div>
             </div>
         </>
