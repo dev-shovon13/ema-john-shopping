@@ -12,7 +12,16 @@ const Shop = () => {
     const [displayProducts, setDisplayProducts] = useState([])
 
     const handleAddToCart = (product) => {
-        const newCart = [...cart, product]
+        let newCart = []
+        const exists = cart.find(pd => pd.key === product.key)
+        if (exists) {
+            const rest = cart.filter(pd => pd.key !== product.key)
+            product.quantity += 1
+            newCart = [...rest, product]
+        } else {
+            product.quantity = 1
+            newCart = [...cart, product]
+        }
         setCart(newCart)
         addToDB(product.key)
     }
