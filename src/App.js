@@ -28,7 +28,7 @@ function App() {
           <Route exact path="/review">
             <OrderReview />
           </Route>
-          <Route exact path="/review/order">
+          <Route exact path="/order">
             <OrderDone />
           </Route>
           <Route path="/inventory">
