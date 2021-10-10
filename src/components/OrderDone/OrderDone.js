@@ -4,6 +4,7 @@ import image from '../../images/giphy.gif'
 const OrderDone = () => {
     return (
         <div>
+            <div className="top-margin"></div>
             <div className="bg-success py-1 text-center text-white fixed-top-2">
                 <h4>Order Completed</h4>
             </div>

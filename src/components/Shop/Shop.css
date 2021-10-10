@@ -1,4 +1,4 @@
-.fixed-top-1{
+/* .fixed-top-1{
     width: 100%;
   position: fixed;
   margin-top: -55px;
@@ -6,8 +6,10 @@
 }
 .fixed-top-2{
   margin-top: 55px;
-  }
-
+  } */
+.top-margin{
+  height: 55px;
+}
 .cart-list{
     height: 70%;
   position: fixed;

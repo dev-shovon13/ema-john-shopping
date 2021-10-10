@@ -62,6 +62,7 @@ const Shop = () => {
     return (
         <>
             {/* <Header handleSearch={handleSearch} /> */}
+            <div className="top-margin"></div>
             <div className="bg-secondary py-2 fixed-top-2">
                 <input className="form-control mx-auto w-50 p-1 rounded outline-none" type="text" placeholder="Search Product" onChange={handleSearch} />
             </div>

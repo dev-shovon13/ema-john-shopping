@@ -55,9 +55,6 @@ const Cart = (props) => {
                 </div>
             </div>
             <div className="text-center mt-3">
-                {/* <Link to="/review">
-                    <button className="cart-btn px-3"><small>Review Your Order</small></button>
-                </Link> */}
                 {props.children}
             </div>
         </>

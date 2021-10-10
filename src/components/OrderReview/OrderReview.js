@@ -19,11 +19,13 @@ const OrderReview = () => {
     const orderNowHandle = () => {
         if (cart.length) {
             clearTheCart()
+            // i can go to the location by the way shown below and also by attaching Link tag to the button and setting up the path by to="/locationName"
             history.push('/order')
         }
     }
     return (
         <div>
+            <div className="top-margin"></div>
             <div className="bg-secondary py-1 text-center text-white fixed-top-2">
                 <h4>Order Review</h4>
             </div>
