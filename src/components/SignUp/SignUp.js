@@ -1,4 +1,4 @@
-import { faGithub, faGoogle, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook, faGithub, faGoogle, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faFingerprint } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
@@ -9,7 +9,7 @@ import './SignUp.css'
 
 const SignUp = () => {
     // imports 
-    const { signInUsingGoogle, signInUsingGithub, signInUsingTwitter, error, setError, handleName, handleEmail, handlePassword, handleUserSignUp, handleSubmit, setUser, setUserName } = useAuth()
+    const { signInUsingGoogle, signInUsingGithub, signInUsingTwitter, signInUsingFacebook, error, setError, handleName, handleEmail, handlePassword, handleUserSignUp, handleSubmit, setUser, setUserName } = useAuth()
 
     const location = useLocation()
     const history = useHistory()
@@ -38,6 +38,16 @@ const SignUp = () => {
     // sign in using twitter
     const handleTwitterLogIn = () => {
         signInUsingTwitter()
+            .then(result => {
+                history.push(redirect_URI)
+                setError('')
+            }).catch((error) => {
+                setError(error.message)
+            })
+    }
+    // sign in using facebook
+    const handleFacebookLogIn = () => {
+        signInUsingFacebook()
             .then(result => {
                 history.push(redirect_URI)
                 setError('')
@@ -102,6 +112,7 @@ const SignUp = () => {
                                     <FontAwesomeIcon onClick={handleGoogleLogIn} icon={faGoogle} className="me-2 border rounded-circle p-2 shadow fs-icon" />
                                     <FontAwesomeIcon onClick={handleGithubLogIn} icon={faGithub} className="me-2 border rounded-circle p-2 shadow fs-icon" />
                                     <FontAwesomeIcon onClick={handleTwitterLogIn} icon={faTwitter} className="me-2 border rounded-circle p-2 shadow fs-icon" />
+                                    <FontAwesomeIcon onClick={handleFacebookLogIn} icon={faFacebook} className="me-2 border rounded-circle p-2 shadow fs-icon" />
                                 </div>
                             </div>
                         </div>

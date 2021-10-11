@@ -16,6 +16,9 @@
 .fa-twitter{
     color: #009DED;
 }
+.fa-facebook{
+    color: #046FE5;
+}
 /* using some media query  */
 @media (max-width:992px) { 
 .login-form{

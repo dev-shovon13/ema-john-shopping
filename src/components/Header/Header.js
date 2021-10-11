@@ -42,7 +42,6 @@ const Header = (props) => {
                             }}
                                 to="/inventory" onClick={showAlert}>Manage Inventory</NavLink>
                         </li>
-
                     </ul>
 
                     {

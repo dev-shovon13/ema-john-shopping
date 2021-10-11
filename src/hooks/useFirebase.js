@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import initializeAuthentication from '../Firebase/firebase.initialization';
 
 // importing from firebase 
-import { getAuth, GoogleAuthProvider, GithubAuthProvider, TwitterAuthProvider, signInWithPopup, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, GithubAuthProvider, TwitterAuthProvider, FacebookAuthProvider, signInWithPopup, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 initializeAuthentication()
 
@@ -21,6 +21,7 @@ const useFirebase = () => {
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
     const twitterProvider = new TwitterAuthProvider();
+    const facebookProvider = new FacebookAuthProvider();
 
     // sign in using google account 
     const signInUsingGoogle = () => {
@@ -33,6 +34,10 @@ const useFirebase = () => {
     // sign in using twitter account 
     const signInUsingTwitter = () => {
         return signInWithPopup(auth, twitterProvider)
+    }
+    // sign in using facebook account 
+    const signInUsingFacebook = () => {
+        return signInWithPopup(auth, facebookProvider)
     }
     // observe whether user auth state changed or not
     useEffect(() => {
@@ -99,6 +104,7 @@ const useFirebase = () => {
         signInUsingGoogle,
         signInUsingGithub,
         signInUsingTwitter,
+        signInUsingFacebook,
         logOut,
         handleSubmit,
         handleName,
