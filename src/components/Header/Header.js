@@ -4,6 +4,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth'
 import logo from '../../images/logo.png'
+import userAvatar from '../../images/avatar.png'
 import './Header.css'
 
 const Header = (props) => {
@@ -47,9 +48,12 @@ const Header = (props) => {
                     {
                         user.displayName ?
                             <div className="d-flex align-items-center justify-content-center">
-                                <img src={user.photoURL} alt="" style={{ height: '35px', borderRadius: '50%' }} className="me-2" />
+                                {user.photoURL ?
+                                    <img src={user.photoURL} alt="" style={{ height: '35px', borderRadius: '50%' }} className="me-2" />
+                                    :
+                                    <img src={userAvatar} alt="" style={{ height: '35px', borderRadius: '50%' }} className="me-2" />}
                                 <span className="fw-bold text-white">{user.displayName}</span>
-                                <button className="btn btn-danger ms-2" onClick={logOut}>Logout</button>
+                                <button className="btn btn-danger ms-2 btn-sm" onClick={logOut}>Logout</button>
                             </div>
                             :
                             <div className="d-flex justify-content-center">

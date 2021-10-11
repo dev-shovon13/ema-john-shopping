@@ -24,30 +24,23 @@ const useFirebase = () => {
 
     // sign in using google account 
     const signInUsingGoogle = () => {
-        return signInWithPopup(auth, googleProvider).catch((error) => {
-            setError(error.message)
-        })
+        return signInWithPopup(auth, googleProvider)
     }
     // sign in using github account 
     const signInUsingGithub = () => {
-        return signInWithPopup(auth, githubProvider).catch((error) => {
-            setError(error.message)
-        })
+        return signInWithPopup(auth, githubProvider)
     }
     // sign in using twitter account 
     const signInUsingTwitter = () => {
-        return signInWithPopup(auth, twitterProvider).catch((error) => {
-            setError(error.message)
-        })
+        return signInWithPopup(auth, twitterProvider)
     }
     // observe whether user auth state changed or not
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
             }
         });
-        return unsubscribe;
     }, [])
 
     // user logout 
@@ -71,7 +64,7 @@ const useFirebase = () => {
         setName(e.target.value);
     }
 
-    const setUserName = (e) => {
+    const setUserName = () => {
         updateProfile(auth.currentUser, {
             displayName: name
         }).then(() => {

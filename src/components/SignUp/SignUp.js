@@ -2,18 +2,20 @@ import { faGithub, faGoogle, faTwitter } from '@fortawesome/free-brands-svg-icon
 import { faFingerprint } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import './SignUp.css'
-import signup from '../../images/signup.png'
 import { NavLink, useLocation, useHistory } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import signup from '../../images/signup.png'
+import './SignUp.css'
 
 const SignUp = () => {
+    // imports 
     const { signInUsingGoogle, signInUsingGithub, signInUsingTwitter, error, setError, handleName, handleEmail, handlePassword, handleUserSignUp, handleSubmit, setUser, setUserName } = useAuth()
 
     const location = useLocation()
     const history = useHistory()
     const redirect_URI = location.state?.from || '/home'
 
+    // sign in using google
     const handleGoogleLogIn = () => {
         signInUsingGoogle()
             .then(result => {
@@ -23,6 +25,7 @@ const SignUp = () => {
                 setError(error.message)
             })
     }
+    // sign in using github
     const handleGithubLogIn = () => {
         signInUsingGithub()
             .then(result => {
@@ -32,6 +35,7 @@ const SignUp = () => {
                 setError(error.message)
             })
     }
+    // sign in using twitter
     const handleTwitterLogIn = () => {
         signInUsingTwitter()
             .then(result => {
@@ -41,9 +45,12 @@ const SignUp = () => {
                 setError(error.message)
             })
     }
+    // sign up using email and password 
     const handleSignUp = () => {
         handleUserSignUp()
             .then(result => {
+                console.log('user', result.user);
+                console.log('name', result.displayName);
                 setUser(result.user)
                 setUserName(result.displayName)
                 history.push(redirect_URI)
