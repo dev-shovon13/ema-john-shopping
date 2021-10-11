@@ -1,22 +1,21 @@
-import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faGoogle, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { NavLink, useLocation, useHistory } from 'react-router-dom';
 import login from '../../images/login.png'
-import './LogIn.css'
 import useAuth from '../../hooks/useAuth';
+import './LogIn.css'
 
 const LogIn = () => {
-    const clickHandle = event => {
-        event.preventDefault()
-    }
-    const { signInUsingGoogle, signInUsingGithub, error, setError } = useAuth()
+    // imports 
+    const { signInUsingGoogle, signInUsingGithub, signInUsingTwitter, error, setError, handleEmail, handlePassword, handleSubmit, handleUserSignIn, setUser, setUserName } = useAuth()
 
     const location = useLocation()
     const history = useHistory()
     const redirect_URI = location.state?.from || '/home'
 
+    // sign in using google
     const handleGoogleLogIn = () => {
         signInUsingGoogle()
             .then(result => {
@@ -26,9 +25,33 @@ const LogIn = () => {
                 setError(error.message)
             })
     }
+    // sign in using github
     const handleGithubLogIn = () => {
         signInUsingGithub()
             .then(result => {
+                history.push(redirect_URI)
+                setError('')
+            }).catch((error) => {
+                setError(error.message)
+            })
+    }
+    // sign in using twitter
+    const handleTwitterLogIn = () => {
+        signInUsingTwitter()
+            .then(result => {
+                console.log(result);
+                history.push(redirect_URI)
+                setError('')
+            }).catch((error) => {
+                setError(error.message)
+            })
+    }
+    // sign in using email and password 
+    const handleSignIn = () => {
+        handleUserSignIn()
+            .then(result => {
+                setUser(result.user)
+                setUserName(result.displayName)
                 history.push(redirect_URI)
                 setError('')
             }).catch((error) => {
@@ -42,25 +65,27 @@ const LogIn = () => {
                 <div className="bg-white rounded shadow p-5 pb-2 g-4 w-75 mx-auto log-sign">
                     <div className="row align-items-center">
                         <div className="login-form col-12 col-lg-6 pt-2 pt-lg-0">
-                            <form className="" onSubmit={clickHandle}>
+                            <form className="" onSubmit={handleSubmit}>
                                 <h3 className="pb-3 text-secondary">Log In</h3>
                                 <div className="mb-3">
-                                    <input type="text" className="form-control" placeholder="User ID" />
+                                    <input type="email" className="form-control" placeholder="Email" onBlur={handleEmail} />
                                 </div>
                                 <div className="mb-3">
-                                    <input type="password" className="form-control" placeholder="Password" />
+                                    <input type="password" className="form-control" placeholder="Password" onBlur={handlePassword} />
                                 </div>
                                 <div className="mb-3 text-start">
                                     <NavLink to="/login" className="text-decoration-none text-info">Forgot Password ?</NavLink>
                                 </div>
-                                <button className="btn btn-primary w-100"><FontAwesomeIcon icon={faSignInAlt} className="me-2" />Log In</button>
+                                <button onClick={handleSignIn} className="btn btn-primary w-100"><FontAwesomeIcon icon={faSignInAlt} className="me-2" />Log In</button>
                                 <div className="text-danger fw-bold fs-6">{error}</div>
                             </form>
                             <div className="border-top mt-2">
-                                <p className="my-0 text-secondary">or</p>
+                                <p className="my-0 text-secondary fw-bold">or</p>
+                                <p className="mt-0 text-secondary">Log In with any of these Accounts</p>
                                 <div className="d-flex gap-2 justify-content-center">
-                                    <button onClick={handleGoogleLogIn} className="btn btn-secondary btn-sm my-2"><FontAwesomeIcon icon={faGoogle} className="me-2" />Login With Google</button>
-                                    <button onClick={handleGithubLogIn} className="btn btn-secondary btn-sm my-2"><FontAwesomeIcon icon={faGithub} className="me-2" />Login With Github</button>
+                                    <FontAwesomeIcon onClick={handleGoogleLogIn} icon={faGoogle} className="me-2 border rounded-circle p-2 shadow fs-icon" />
+                                    <FontAwesomeIcon onClick={handleGithubLogIn} icon={faGithub} className="me-2 border rounded-circle p-2 shadow fs-icon" />
+                                    <FontAwesomeIcon onClick={handleTwitterLogIn} icon={faTwitter} className="me-2 border rounded-circle p-2 shadow fs-icon" />
                                 </div>
                             </div>
                         </div>

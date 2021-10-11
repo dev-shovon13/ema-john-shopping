@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 import { addToDB, deleteFromDB, getStoredCart } from '../../utilities/fakeDB';
 import Cart from '../Cart/Cart';
 // import Header from '../Header/Header';
@@ -7,6 +8,7 @@ import Product from '../Product/Product';
 import './Shop.css'
 
 const Shop = () => {
+    const { user } = useAuth()
     const [products, setProducts] = useState([])
     const [cart, setCart] = useState([])
     const [displayProducts, setDisplayProducts] = useState([])
@@ -75,7 +77,7 @@ const Shop = () => {
                 <div className="cart-list col-5 col-md-3 p-3">
                     <Cart cart={cart}>
                         <Link to="/review">
-                            <button className="cart-btn px-3"><small>Review Your Order</small></button>
+                            <button onClick={() => !user.displayName && alert("Please Sign In to Proceed")} className="cart-btn px-3"><small>Review Your Order</small></button>
                         </Link>
                     </Cart>
                 </div>

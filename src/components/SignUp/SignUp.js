@@ -1,4 +1,4 @@
-import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faGoogle, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faFingerprint } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
@@ -8,10 +8,7 @@ import { NavLink, useLocation, useHistory } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
 const SignUp = () => {
-    const clickHandle = event => {
-        event.preventDefault()
-    }
-    const { signInUsingGoogle, signInUsingGithub, error, setError } = useAuth()
+    const { signInUsingGoogle, signInUsingGithub, signInUsingTwitter, error, setError, handleName, handleEmail, handlePassword, handleUserSignUp, handleSubmit, setUser, setUserName } = useAuth()
 
     const location = useLocation()
     const history = useHistory()
@@ -35,9 +32,30 @@ const SignUp = () => {
                 setError(error.message)
             })
     }
+    const handleTwitterLogIn = () => {
+        signInUsingTwitter()
+            .then(result => {
+                history.push(redirect_URI)
+                setError('')
+            }).catch((error) => {
+                setError(error.message)
+            })
+    }
+    const handleSignUp = () => {
+        handleUserSignUp()
+            .then(result => {
+                setUser(result.user)
+                setUserName(result.displayName)
+                history.push(redirect_URI)
+                setError('')
+            }).catch((error) => {
+                setError(error.message)
+            })
+    }
     return (
-        <div className="sign-up-bg pt-2 pb-2 text-center">
+        <div className="sign-up-bg  pb-2 text-center">
             <div className="top-margin"></div>
+            <div className="mt-5"></div>
             <div className="container mb-3">
                 <div className="bg-white rounded shadow p-4 pb-2 g-4 w-75 mx-auto log-sign">
                     <div className="row  align-items-center">
@@ -45,36 +63,38 @@ const SignUp = () => {
                             <img src={signup} alt="" className="img-fluid" />
                         </div>
                         <div className="col-12 col-lg-6">
-                            <form className="" onSubmit={clickHandle}>
+                            <form onSubmit={handleSubmit}>
                                 <h3 className="pb-3 text-secondary">Sign Up</h3>
                                 <div className="mb-3 d-flex ">
-                                    <input type="text" className="form-control me-3" placeholder="First Name" />
-                                    <input type="text" className="form-control" placeholder="Last Name" />
+                                    <input type="text" className="form-control" placeholder="Name" onBlur={handleName} required />
+                                    {/* <input type="text" className="form-control" placeholder="Last Name" onBlur={lastName} /> */}
                                 </div>
                                 <div className="mb-3">
-                                    <input type="email" className="form-control" placeholder="Enter Your Email" />
+                                    <input type="email" className="form-control" placeholder="Email" onBlur={handleEmail} required />
                                 </div>
-                                <div className="mb-3">
+                                {/* <div className="mb-3">
                                     <input type="text" className="form-control" placeholder="User ID" />
-                                </div>
+                                </div> */}
                                 <div className="mb-3">
-                                    <input type="password" className="form-control" placeholder="Password" />
+                                    <input type="password" className="form-control" placeholder="Password" onBlur={handlePassword} required />
                                 </div>
-                                <div className="mb-3">
+                                {/* <div className="mb-3">
                                     <input type="password" className="form-control" placeholder="Confirm Password" />
-                                </div>
+                                </div> */}
                                 <div className="mb-3 form-check text-start">
                                     <input type="checkbox" className="form-check-input" />
                                     <label className="form-check-label text-secondary">I accept the <NavLink to="/signup" className="text-decoration-none text-info">Terms of Use</NavLink> & <NavLink to="/signup" className="text-decoration-none text-info">Privacy Policy</NavLink></label>
                                 </div>
-                                <button onClick={clickHandle} className="btn btn-primary w-100"><FontAwesomeIcon icon={faFingerprint} className="me-2" />Submit</button>
+                                <button onClick={handleSignUp} className="btn btn-primary w-100"><FontAwesomeIcon icon={faFingerprint} className="me-2" />Submit</button>
                                 <div className="text-danger fw-bold fs-6">{error}</div>
                             </form>
                             <div className="border-top mt-2">
-                                <p className="my-0 text-secondary">or</p>
+                                <p className="my-0 text-secondary fw-bold">or</p>
+                                <p className="mt-0 text-secondary">Log In with any of these Accounts</p>
                                 <div className="d-flex gap-2 justify-content-center">
-                                    <button className="btn btn-secondary btn-sm my-2" onClick={handleGoogleLogIn}><FontAwesomeIcon icon={faGoogle} className="me-2" />Login With Google</button>
-                                    <button className="btn btn-secondary btn-sm my-2" onClick={handleGithubLogIn}><FontAwesomeIcon icon={faGithub} className="me-2" />Login With Github</button>
+                                    <FontAwesomeIcon onClick={handleGoogleLogIn} icon={faGoogle} className="me-2 border rounded-circle p-2 shadow fs-icon" />
+                                    <FontAwesomeIcon onClick={handleGithubLogIn} icon={faGithub} className="me-2 border rounded-circle p-2 shadow fs-icon" />
+                                    <FontAwesomeIcon onClick={handleTwitterLogIn} icon={faTwitter} className="me-2 border rounded-circle p-2 shadow fs-icon" />
                                 </div>
                             </div>
                         </div>

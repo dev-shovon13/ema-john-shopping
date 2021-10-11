@@ -47,7 +47,7 @@ const Header = (props) => {
                     {
                         user.displayName ?
                             <div className="d-flex align-items-center justify-content-center">
-                                <img src={user.photoURL} alt="" style={{ height: '35px', borderRadius: '50%' }} className="me-2 border" />
+                                <img src={user.photoURL} alt="" style={{ height: '35px', borderRadius: '50%' }} className="me-2" />
                                 <span className="fw-bold text-white">{user.displayName}</span>
                                 <button className="btn btn-danger ms-2" onClick={logOut}>Logout</button>
                             </div>

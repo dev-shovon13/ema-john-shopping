@@ -21,6 +21,8 @@ const OrderReview = () => {
             clearTheCart()
             // i can go to the location by the way shown below and also by attaching Link tag to the button and setting up the path by to="/locationName"
             history.push('/order')
+        } else {
+            alert("Please Select Item and Proceed")
         }
     }
     return (

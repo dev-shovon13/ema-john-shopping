@@ -2,11 +2,19 @@
     background-image: linear-gradient(#18808050, #b1092d50);
     height: 100vh;
 }
-.fa-google{
-    color: #4285F4;
+.fs-icon{
+    font-size: 45px;
+    transition: all .5s;
 }
-.fa-git{
-    color: #ffffff;
+.fs-icon:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.fa-google{
+    color: #4081EC;
+}
+.fa-twitter{
+    color: #009DED;
 }
 /* using some media query  */
 @media (max-width:992px) { 
