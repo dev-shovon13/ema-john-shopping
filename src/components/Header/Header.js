@@ -7,7 +7,7 @@ import logo from '../../images/logo.png'
 import userAvatar from '../../images/avatar.png'
 import './Header.css'
 
-const Header = (props) => {
+const Header = () => {
     const { user, logOut } = useAuth();
     const showAlert = () => {
         !user.displayName && alert("Please Sign In to Proceed")

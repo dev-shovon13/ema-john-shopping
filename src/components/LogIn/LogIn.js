@@ -1,9 +1,10 @@
-import { faFacebook, faGithub, faGoogle, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { NavLink, useLocation, useHistory } from 'react-router-dom';
 import login from '../../images/login.png'
+import google from '../../images/google.png'
 import useAuth from '../../hooks/useAuth';
 import './LogIn.css'
 
@@ -61,7 +62,7 @@ const LogIn = () => {
         handleUserSignIn()
             .then(result => {
                 setUser(result.user)
-                setUserName(result.displayName)
+                setUserName(result.user.displayName)
                 history.push(redirect_URI)
                 setError('')
             }).catch((error) => {
@@ -93,7 +94,7 @@ const LogIn = () => {
                                 <p className="my-0 text-secondary fw-bold">or</p>
                                 <p className="mt-0 text-secondary">Log In with any of these Accounts</p>
                                 <div className="d-flex gap-2 justify-content-center">
-                                    <FontAwesomeIcon onClick={handleGoogleLogIn} icon={faGoogle} className="me-2 border rounded-circle p-2 shadow fs-icon" />
+                                    <img onClick={handleGoogleLogIn} src={google} alt="" style={{ height: "45px" }} className="me-2 border rounded-circle p-1 shadow fs-icon" />
                                     <FontAwesomeIcon onClick={handleGithubLogIn} icon={faGithub} className="me-2 border rounded-circle p-2 shadow fs-icon" />
                                     <FontAwesomeIcon onClick={handleTwitterLogIn} icon={faTwitter} className="me-2 border rounded-circle p-2 shadow fs-icon" />
                                     <FontAwesomeIcon onClick={handleFacebookLogIn} icon={faFacebook} className="me-2 border rounded-circle p-2 shadow fs-icon" />

@@ -1,9 +1,8 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
-
-import './Product.css'
 import Rating from 'react-rating';
+import './Product.css'
 
 const Product = (props) => {
     const { name, img, seller, price, stock, features, shipping, star } = props.product
@@ -41,7 +40,7 @@ const Product = (props) => {
                         {
                             features.map(feature => {
                                 return (
-                                    <p className="m-0 text-secondary"><small><span className="fw-bold">{feature.description}:</span> {feature.value}</small></p>
+                                    <p key={feature.description} className="m-0 text-secondary"><small><span className="fw-bold">{feature.description}:</span> {feature.value}</small></p>
                                 )
                             })
                         }
